@@ -1,0 +1,50 @@
+﻿@model ProjetoLoja.Models.LoginViewModel;
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h2 class="card-title text-center mb-4">Login</h2>
+
+                    <section>
+                        <form asp-action="Login" method="post">
+                            @Html.AntiForgeryToken()
+
+                            <div asp-validation-summary="ModelOnly" class="text-danger small mb-3"></div>
+
+                            <div class="mb-3">
+                                <label asp-for="Email" class="form-label">E-mail</label>
+                                <input asp-for="Email" class="form-control" placeholder="Digite seu email" />
+                                <span asp-validation-for="Email" class="text-danger small"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="Senha" class="form-label">Senha</label>
+                                <input asp-for="Senha" type="password" class="form-control" placeholder="Digite sua senha" />
+                                <span asp-validation-for="Senha" class="text-danger small"></span>
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-secondary">Entrar</button>
+                            </div>
+
+
+                            <div class="mt-3">
+                                <span>Ainda não tem uma conta?</span>
+                                @* Link para a Action CriarConta no mesmo Controller *@
+                                <a asp-action="CriarConta" asp-controller="Usuario" class="btn btn-outline-success btn-sm ms-2">
+                                    Criar nova conta
+                                </a>
+                            </div>
+                        </form>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,88 @@
+﻿@model IEnumerable<ProjetoLoja.Models.ProdutoViewModel>
+@{
+}
+
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Produtos</h2>
+        <a asp-controller="Produto" asp-action="CadastrarProduto" class="btn btn-success">
+            <i class="bi bi-plus-lg"></i> Novo Produto
+        </a>
+    </div>
+
+    <div class="card shadow-sm" >
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th width="100">ID</th>
+                        <th>Produto</th>
+                        <th>Preço</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>
+                                <span>@item.Nome</span>
+                            </td>
+                         
+                            <td>
+                                <span>@item.Preco.ToString("C")</span>
+                            </td>
+                            <td>
+                                <div class="d-flex">
+                                    @if (User.HasClaim("NivelAcesso", "Admin"))
+                                    {
+                                        <a asp-controller="Produto" asp-action="EditarProduto" asp-route-id="@item.Id" class="btn btn-warning mx-4">
+                                            Editar
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        @* botão negar *@
+                                        <button class="btn btn-danger">
+                                            Acesso Negado
+                                        </button>
+                                    }
+
+
+
+                                    @* botão negar *@
+                                    @if (User.HasClaim("NivelAcesso", "Admin"))
+                                    {
+                                        <form asp-controller="Produto" asp-action="ExcluirProduto" asp-route-id="@item.Id"
+                                              method="post" onsubmit="return confirm('Excluir @item.Nome permanentemente?')">
+                                            @Html.AntiForgeryToken()
+                                            <button type="submit" class="btn btn-danger " >
+                                                Excluir
+                                            </button>
+                                        </form>
+                                    }
+                                    else
+                                    {
+                                        @* botão negar *@
+                                        <button class="btn btn-danger">
+                                            Acesso Negado
+                                        </button>
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        @if (!Model.Any())
+        {
+            <div class="card-body text-center py-5">
+                <p class="text-muted mb-0">Nenhum produto encontrado no estoque.</p>
+            </div>
+        }
+    </div>
+</div>
