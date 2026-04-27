@@ -1,0 +1,33 @@
+Com base na estrutura do projeto que já esta com login com dois niveis de acesso admin e operador usando autenticação com claims
+banco de dados com as tabelas usuario e produtos, tela home que lista os produtos
+cadastrados, produto que lista,cadastra,altera e excluir  produtos , logando com usuario os botões excluir e alterar são
+bloqueados devido a restrição, a estilização foi feita com bootstrap.
+
+Cria versionamento semantico
+
+1º Criar a tabela do cliente(Nome, Telefone, Email)
+2º Criar a model
+3º Criar o repositorio
+4º Criar a interface
+5º Configurar a injeção de dependência
+6º Criar a Controller
+7º Criar a View
+8º Ajustar o Layout para visualizar
+
+
+1. Camada de Dados & Modelagem
+
+Banco de Dados: Criar a tabela Clientes com os campos: Nome, Telefone e Email.
+Model: Mapear a entidade Cliente no projeto, garantindo as anotações de validação ([Required], [EmailAddress]).
+
+2. Camada de Persistência (Repository Pattern)
+
+Interface: Definir IClienteRepository para garantir a abstração dos métodos de persistência.
+Repositório: Implementar a classe ClienteRepository com a lógica de acesso ao banco.
+Injeção de Dependência: Registrar o serviço no container Program.cs.
+
+3. Camada de Controle e Visão
+
+Controller: Criar a ClientesController, aplicando os atributos de autorização [Authorize] para proteger as rotas.
+Views: Desenvolver as telas de Listagem e Cadastro utilizando componentes do Bootstrap.
+Layout: Atualizar o menu de navegação principal (_Layout.cshtml) para incluir o link de acesso ao novo módulo.
